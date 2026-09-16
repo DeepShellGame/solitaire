@@ -841,3 +841,25 @@ body {
   line-height: 1.45;
   text-align: center;
 }
+
+
+/* =========================
+   バージョン表記
+   ========================= */
+.version-badge {
+  position: fixed;
+  top: max(10px, env(safe-area-inset-top));
+  right: max(12px, env(safe-area-inset-right));
+  z-index: 10000;
+  padding: 5px 9px;
+  border-radius: 7px;
+  background: rgba(0, 0, 0, 0.48);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.03em;
+  pointer-events: none;
+  user-select: none;
+}

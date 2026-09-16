@@ -880,8 +880,7 @@ function onSpiderColumnCardTap(colIndex, rowIndex) {
     const head = col[chosenStart];
     uiState.statusText = cardLabelGeneric(head);
     log(`[SEL ${ts()}] Spider select col=${colIndex} row=${chosenStart} head=${uiState.statusText}`);
-    // ダブルタップ猶予
-    armDblClickWindow();
+    // Spiderにはダブルクリック自動送りが無いため、ドラッグ抑止時間は設けない。
     rerender();
 }
 // -------------------------------------------------
@@ -2112,7 +2111,10 @@ function rerender() {
                 onSelectSource: (srcRef) => selectSourceGeneric(srcRef),
                 onColumnCardTap: (colIndex, rowIndex) => onSpiderColumnCardTap(colIndex, rowIndex),
                 onClickDestination: (destRef) => clickDestinationGeneric(destRef),
-                onDragStart: (srcRef, ev) => startDragWithDblclickGuard(srcRef, ev),
+                // SpiderはダブルクリックFoundation送りが無いので、
+                // FreeCell/Klondike用の長押し・dblclickゲートを通さず
+                // pointerdownからDnDコアへ直接渡す。
+                onDragStart: (srcRef, ev) => dnd.startDrag(srcRef, ev),
                 onStockClick: () => spiderDealFromStockOnce(),
                 onEmptyBoardClick: () => emptyBoardClick(),
             });
