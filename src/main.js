@@ -1246,9 +1246,8 @@ function startDragWithHoldAndDistanceGate(srcRef, ev) {
         if (dragGate.active && dragGate.srcRef)
             startDragNow(ev);
     }, HOLD_MS);
-    // 選択ラベルを即時更新（UIフィードバック）
+    // 選択情報だけ更新する。pointerdown中のDOMを再描画しないことで、直接ドラッグとdblclickを維持する。
     updateSelectionAndStatusForDragStart(srcRef);
-    rerender();
     log(`[DND ${ts()}] gate armed pid=${dragGate.pointerId} at(${dragGate.startX},${dragGate.startY}) hold=${HOLD_MS} move=${MOVE_PX}`);
 }
 // 互換：既存呼び出し点の関数名は維持
