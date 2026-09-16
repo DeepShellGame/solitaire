@@ -166,8 +166,8 @@ export function renderSpiderScreen(rootEl, session, uiState, highlightMap, gameC
                     ev.stopPropagation();
                     // preventDefault はしない（クリック/ダブルクリックの邪魔をしない）
                     const srcRef = { srcType: "tableau", colIndex, cardIndex };
-                    // 視覚整合のため選択も同期（任意）
-                    handlers.onSelectSource(srcRef);
+                    // pointerdown中に選択処理で再描画すると、押しているカードDOMが消えて
+                    // Spiderだけ直接ドラッグが途切れるため、選択更新はonDragStart側に任せる。
                     handlers.onDragStart(srcRef, ev);
                 });
                 // ヘッドは通常クリックで選択（スナップ不要）
